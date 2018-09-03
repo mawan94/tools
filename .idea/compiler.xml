@@ -14,7 +14,7 @@
     <bytecodeTargetLevel>
       <module name="consumer" target="1.8" />
       <module name="provider" target="1.8" />
-      <module name="thumbnailator" target="1.5" />
+      <module name="thumbnailator" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
