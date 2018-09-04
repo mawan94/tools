@@ -1,4 +1,3 @@
-package com.github.mawan94.demo;
 
 public class Person {
 
