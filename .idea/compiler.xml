@@ -9,12 +9,14 @@
         <module name="consumer" />
         <module name="provider" />
         <module name="thumbnailator" />
+        <module name="websocket-demo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="consumer" target="1.8" />
       <module name="provider" target="1.8" />
-      <module name="thumbnailator" target="8" />
+      <module name="thumbnailator" target="1.5" />
+      <module name="websocket-demo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

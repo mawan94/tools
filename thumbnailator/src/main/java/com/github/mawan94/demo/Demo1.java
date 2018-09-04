@@ -104,7 +104,7 @@ public class Demo1 {
         // 5.3 显示月薪超过1400美元的PHP程序员
         System.out.println("下面是月薪超过 $1,400 的PHP程序员:");
         phpProgrammers.stream()
-                .filter((p) -> (p.getSalary() > 1400))
+                .filter((p) -> p.getSalary() > 1400)
                 .forEach((p) -> System.out.printf("%s %s; ", p.getFirstName(), p.getLastName()));
         System.out.println("");
 
@@ -164,6 +164,9 @@ public class Demo1 {
         System.out.println("List中最小的数字 : " + stats.getMin());
         System.out.println("所有数字的总和   : " + stats.getSum());
         System.out.println("所有数字的平均值 : " + stats.getAverage());
+
+        // 6 ::
+
 
 
     }

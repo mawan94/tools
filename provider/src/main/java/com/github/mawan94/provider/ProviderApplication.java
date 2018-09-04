@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 public class ProviderApplication {
+
     @Autowired
     private Producer producer;
 
@@ -16,9 +17,9 @@ public class ProviderApplication {
         SpringApplication.run(ProviderApplication.class, args);
     }
 
-
     @GetMapping("/hi")
     public void hi() {
         producer.sendMsg();
     }
+
 }
