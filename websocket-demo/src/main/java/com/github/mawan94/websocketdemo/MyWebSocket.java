@@ -22,7 +22,8 @@ public class MyWebSocket {
 
 
     /**
-     * 连接建立成功调用的方法*/
+     * 连接建立成功调用的方法
+     */
     @OnOpen
     public void onOpen(Session session) {
         this.session = session;
@@ -30,8 +31,7 @@ public class MyWebSocket {
         addOnlineCount();           //在线数加1
         System.out.println("有新连接加入！当前在线人数为" + getOnlineCount());
         try {
-//            sendMessage(CommonConstant.CURRENT_WANGING_NUMBER.toString());
-            sendMessage("hello");
+            sendMessage("有人加入了 当前人数 : " + onlineCount);
         } catch (IOException e) {
             System.out.println("IO异常");
         }
@@ -48,23 +48,24 @@ public class MyWebSocket {
     }
 
 
-
     /**
      * 收到客户端消息后调用的方法
      *
-     * @param message 客户端发送过来的消息*/
+     * @param message 客户端发送过来的消息
+     */
     @OnMessage
     public void onMessage(String message, Session session) {
         System.out.println("来自客户端的消息:" + message);
 
         //群发消息
-        for (MyWebSocket item : webSocketSet) {
+        webSocketSet.forEach((item -> {
             try {
                 item.sendMessage(message);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }));
+
     }
 
 
@@ -80,10 +81,11 @@ public class MyWebSocket {
 
     /**
      * 这个方法与上面几个方法不一样。没有用注解，是根据自己需要添加的方法。
+     *
      * @param message
      * @throws IOException
      */
-    public void sendMessage(String message) throws IOException{
+    public void sendMessage(String message) throws IOException {
         this.session.getBasicRemote().sendText(message);
         //this.session.getAsyncRemote().sendText(message);
     }
@@ -91,15 +93,16 @@ public class MyWebSocket {
 
     /**
      * 群发自定义消息
-     * */
+     */
     public static void sendInfo(String message) throws IOException {
-        for (MyWebSocket item : webSocketSet) {
+        webSocketSet.forEach((item) -> {
             try {
                 item.sendMessage(message);
             } catch (IOException e) {
-                continue;
+                e.printStackTrace();
             }
-        }
+        });
+
     }
 
     public static synchronized int getOnlineCount() {
@@ -113,11 +116,5 @@ public class MyWebSocket {
     public static synchronized void subOnlineCount() {
         MyWebSocket.onlineCount--;
     }
-
-
-
-
-
-
 
 }
