@@ -2,15 +2,12 @@ package com.github.mawan94.demo;
 
 import net.coobird.thumbnailator.Thumbnails;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
 
 
 public class Demo1 {
@@ -26,8 +23,38 @@ public class Demo1 {
 
         System.out.println(2 << 2);
 
+    }
+}
 
+
+
+// 时钟
+class HyClock extends JFrame implements Runnable {
+    public static JLabel tm;
+    public void run() {
+        while (true) {
+            Calendar c = Calendar.getInstance();
+            String nowtime = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND);
+            tm.setText(nowtime);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
+        }
     }
 
-
+    public static void main(String[] agrs) {
+        HyClock  hytime = new HyClock();
+        hytime.setLayout(new FlowLayout());
+        tm = new JLabel();
+        tm.setFont(new Font("宋体", 1, 40));
+        tm.setForeground(Color.RED);
+        hytime.add(tm);
+        hytime.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        hytime.setSize(300, 100);
+        hytime.setVisible(true);
+        hytime.setLocation(400, 400);
+        Thread t = new Thread(hytime);
+        t.start();
+    }
 }
